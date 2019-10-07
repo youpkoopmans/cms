@@ -11,25 +11,44 @@ class User extends Authenticatable
 
     /**
      * The attributes that are mass assignable.
-     *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'email',
+        'password',
     ];
 
     /**
      * The attributes that should be hidden for arrays.
-     *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
+    /**
+     * The attributes that can be nullable.
+     * @var array
+     */
+    protected $nullable = [
+    ];
+
+    /**
+     * Database relation to roles.
+     */
     public function roles()
     {
         return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * Database relation to posts.
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
     }
 
     public function checkRoles($roles)
@@ -54,8 +73,4 @@ class User extends Authenticatable
         return (bool) $this->roles()->where('name', $role)->first();
     }
 
-    public function posts()
-    {
-        return $this->hasMany(Post::class);
-    }
 }
