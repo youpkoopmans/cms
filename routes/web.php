@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'PostController@all');
+
+Route::get('/posts/{post}', 'PostController@single');
 
 Auth::routes();
 
