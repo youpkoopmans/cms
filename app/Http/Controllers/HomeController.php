@@ -24,7 +24,7 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         if ($request->user()->hasRole('user')) {
-            return redirect('/');
+            return redirect('home');
         }
 
         if ($request->user()->hasRole('admin')){
